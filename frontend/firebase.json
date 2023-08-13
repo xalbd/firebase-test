@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "source": ".",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "frameworksBackend": {
+      "region": "us-west1"
+    },
+    "rewrites": [
+      {
+        "source": "/api/*",
+        "run": {
+          "serviceId": "api",
+          "region": "us-west1",
+          "pinTag": true
+        }
+      }
+    ]
+  }
+}

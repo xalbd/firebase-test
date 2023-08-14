@@ -11,7 +11,7 @@ Static site files are served through Firebase Hosting, SSR is handled by Cloud F
 - gcloud
 - docker
 
-### Process
+### Front-End Development
 
 - Initialize SvelteKit project
 
@@ -33,6 +33,9 @@ Static site files are served through Firebase Hosting, SSR is handled by Cloud F
   firebase emulators:start
   ```
   - This launches the Vite-driven development server using the Firebase emulator. Navigate to `localhost:5000` in a browser to see the web-app running.
+
+### Front-End Deployment
+
 - Deploy app
 
   ```
@@ -40,6 +43,8 @@ Static site files are served through Firebase Hosting, SSR is handled by Cloud F
   ```
 
   - This deploys the web-app to Firebase.
+
+### Back-End Development
 
 - Set up FastAPI back-end
   - make `app` directory, `Dockerfile`, and `requirements.txt` inside `./backend`
@@ -55,6 +60,17 @@ Static site files are served through Firebase Hosting, SSR is handled by Cloud F
   - First, this builds a Docker image using the Dockerfile, tagging it as `backend`. Note we can tag it as `backend:1.0.0`, for instance, if we would like to version our containers.
   - Then, we run the image in a container. `-p` makes one of the container's ports accessible to the outside computer: in this case, we expose port 8080 of the container to port 9090 on the host. Finally, we set the environment variable PORT to be 8080, allowing the server process in the container to know which port to listen on.
   - Ensure this works by navigating to `localhost:9090/docs` in a browser.
+
+### Linking Front/Back-End
+
+- Create `.env.development` and `.env.prduction` files in `frontend`. Insert `VITE_BASE_URL` as an environment variable in both. In our case, the `.development` version should say `http://localhost:9090"` and the `.production` version should say the URL of the hosted wbsite.
+- Install axios.
+
+```
+npm install axios
+```
+
+### Back-End Deployment
 
 - Build/Deploy Docker image on Google Cloud Run
   - Create a Docker repository on Artifact Registry. Name it clearly, in our case `api_repo`.
